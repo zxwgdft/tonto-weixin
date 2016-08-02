@@ -1,0 +1,25 @@
+<style>
+.word-img{
+	position: absolute;
+	top: 30%;
+	width: 120px;
+	word-wrap: break-word;
+	overflow: hidden;
+	float: right;
+	margin-left: 10px;
+	font-size: 30px
+}
+
+</style>
+<div class="modal-body">
+	<img id="success_img" alt="" style="margin:10px"/>
+	<span class="word-img">新增成功</span>
+	<script type="text/javascript">
+		$("#success_img").attr("src",$.getRootPath()+"/image/success.png");
+	</script>
+	<div style="margin-top:50px;margin-bottom:10px" align="center">
+		<button type="button" class="btn btn-success" data-dismiss="modal">确定</button>		
+	</div> 
+</div>
+
+	
