@@ -1,11 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menu name="主菜单" id="1">	
-	<action name="歌曲查询" id="11" class="musicAction" input="请输入歌曲名称，加空格或@符号后可加歌手姓名！"></action>
-	<action name="天气查询" id="12" class="weatherAction" input="请输入需要查询的城市名称（汉字或拼音）"></action>
-	<action name="翻译" id="13" class="translateAction" input="请输入需要翻译得词句"></action>
-	<action name="图灵机器人" id="14" class="tulingAction" input="请输入您想说的话"></action>
-	<menu name="历史事件" id="15">	
-		<action name="历史上的今天" id="151" class="historyTodayAction"></action>
-		<action name="历史上的那天" id="152" class="historyThatDayAction" input="请输入月日，按空格分开"></action>
-	</menu>
+	<action name="测试" id="11" class="testAction" input="请输入您的话"></action>
 </menu>

@@ -58,6 +58,16 @@
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />  
 	
+	<!-- WeiXin Handler -->  
+	<bean id="messageHandler" class="com.tonto.weixin.handle.SpringMessageHandler">
+		<property name="sessionContainer">
+			<bean class="com.tonto.weixin.core.handle.session.DefaultSessionContainer"></bean>
+		</property>
+		<property name="interceptorContainer">
+			<bean class="com.tonto.weixin.handle.SpringInterceptorContainer"></bean>
+		</property>
+	</bean>
+	
 <!-- 	<import resource="spring-shiro.xml"/>
  -->	
 	

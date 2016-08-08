@@ -12,16 +12,17 @@ import org.dom4j.io.SAXReader;
 
 import com.tonto.weixin.core.handle.action.ProcessAction;
 import com.tonto.weixin.core.handle.action.common.CommonProcessAction;
+import com.tonto.weixin.core.handle.action.common.MenuAction;
 import com.tonto.weixin.core.handle.action.node.ProcessNode;
 import com.tonto.weixin.core.handle.action.node.ProcessNodeTreeBuilder;
-import com.tonto.weixin.handle.action.tree.ActionBeanFactory;
+import com.tonto.weixin.spring.SpringBeanHolder;
 
 /**
  * 
  * 处理节点构建器
  * 
  * @author TontoZhou
- *
+ * 
  */
 public class ProcessNodeBuilder implements ProcessNodeTreeBuilder {
 
@@ -41,7 +42,7 @@ public class ProcessNodeBuilder implements ProcessNodeTreeBuilder {
 	public ProcessNode build() {
 
 		logger.info("-------------开始创建处理节点-------------");
-		
+
 		InputStream input = null;
 
 		if (xmlPath == null) {
@@ -64,25 +65,26 @@ public class ProcessNodeBuilder implements ProcessNodeTreeBuilder {
 
 			ProcessNode rootNode = parseNode(root, null);
 			rootNode.setParent(rootNode);
-			
-			logger.info("-------------处理节点初始化完成！-------------");			
+
+			logger.info("-------------处理节点初始化完成！-------------");	
+			this.root = rootNode;
 			return rootNode;
 
 		} catch (Exception e) {
 			throw new RuntimeException("解析xml文件错误！", e);
-		}	
-		
+		}
+
 	}
-	
+
 	private final static String MENU = "menu";
 	private final static String ACTION = "action";
 	private final static String ATTRIBUTE_NAME = "name";
 	private final static String ATTRIBUTE_ID = "id";
 	private final static String ATTRIBUTE_CLASS = "class";
 	private final static String ATTRIBUTE_INPUT = "input";
-	
+
 	private ProcessNode parseNode(Element element, ProcessNode parent) {
-		
+
 		String type = element.getName();
 		String name = element.attributeValue(ATTRIBUTE_NAME);
 		Integer id = Integer.valueOf(element.attributeValue(ATTRIBUTE_ID));
@@ -103,13 +105,13 @@ public class ProcessNodeBuilder implements ProcessNodeTreeBuilder {
 		}
 
 		if (type.equals(MENU)) {
-			processNode.setAction(ActionBeanFactory.getMenuAction());
+			processNode.setAction(new MenuAction());
 		} else if (type.equals(ACTION)) {
 
 			String clazzNmae = element.attributeValue(ATTRIBUTE_CLASS);
 			String input = element.attributeValue(ATTRIBUTE_INPUT);
 
-			ProcessAction action = ActionBeanFactory.getProcessAction(clazzNmae);
+			ProcessAction action = (ProcessAction) SpringBeanHolder.getBean(clazzNmae);
 
 			if (action != null) {
 				processNode.setAction(action);

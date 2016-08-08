@@ -23,7 +23,7 @@ import com.tonto.weixin.core.MessageHandler;
  * GET请求提供微信接入验证
  * </p>
  * <p>
- * POST请求提供微信其他请求服务，分为解码，处理，编码3个部分，现在只支持spring注入，实现{@link MessageDecoder}，
+ * POST请求提供微信其他请求服务，分为解码，处理，编码3个部分
  * {@link MessageEncoder}， {@link MessageHandler}接口
  * </p>
  * 
@@ -37,31 +37,30 @@ public class CoreServlet extends HttpServlet {
 	private static final Logger logger = Logger.getLogger(CoreServlet.class);
 
 	private String token;
-	
+
 	private MessageDecoder decoder;
 	private MessageEncoder encoder;
 	private MessageHandler handler;
 
-	
-	private static MessageHandler messageHandler ; 
+	private static MessageHandler messageHandler;
 	private static CoreServlet coreServlet;
-	
+
 	@Override
 	public void init() throws ServletException {
-		
+
 		logger.info("-----------------------初始化CoreServlet---------------------");
-		
+
 		token = getInitParameter("token");
-		
-		if(messageHandler != null)
+
+		if (messageHandler != null)
 			handler = messageHandler;
-		
-		if(decoder == null)
+
+		if (decoder == null)
 			decoder = new DefaultMessageDecoder();
-		
-		if(encoder == null)
+
+		if (encoder == null)
 			encoder = new DefaultMessageEncoder();
-		
+
 		coreServlet = this;
 	}
 
@@ -84,6 +83,10 @@ public class CoreServlet extends HttpServlet {
 
 		// 通过检验signature对请求进行校验，若校验成功则原样返回echostr，表示接入成功，否则接入失败
 		try {
+
+			logger.info("进行微信链接验证：signature:" + signature + "/timestamp:" + timestamp + "/echostr:" + echostr + "/nonce:"
+					+ nonce);
+			
 			boolean result = SignUtil.checkSignature(signature, timestamp, nonce, token);
 
 			if (result) {
@@ -91,9 +94,9 @@ public class CoreServlet extends HttpServlet {
 			} else {
 				logger.error("微信请求确认失败！不能确定为微信服务器发送请求！");
 			}
-			
+
 		} catch (Exception e) {
-			logger.error("微信请求确认错误！",e);
+			logger.error("微信请求确认错误！", e);
 		}
 	}
 
@@ -153,12 +156,12 @@ public class CoreServlet extends HttpServlet {
 
 	public static void setMessageHandler(MessageHandler messageHandler) {
 		CoreServlet.messageHandler = messageHandler;
+		if (coreServlet != null)
+			coreServlet.handler = messageHandler;
 	}
 
 	public static CoreServlet getCoreServlet() {
 		return coreServlet;
 	}
-
-	
 
 }

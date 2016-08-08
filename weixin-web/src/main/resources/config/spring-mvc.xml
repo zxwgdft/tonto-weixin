@@ -67,9 +67,6 @@
  
 	<!-- 控制器异常处理 -->
 	<bean id="exceptionHandlerExceptionResolver" class="com.tonto.wx.exception.ExceptionHandler"></bean>
-	
-	<!-- <bean id="exceptionResolver" class="com.tonto.hms.exception.BusinessExceptionHandler"/>
-  	<bean id="exceptionHandlerExceptionResolver" class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver"></bean>-->
  
   	<!-- <mvc:interceptors>    
 	    <bean class="com.tonto.hms.ums.interceptor.UserSessionInterceptor"></bean>      

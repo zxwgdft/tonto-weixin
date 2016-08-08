@@ -16,20 +16,6 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	<servlet>
-		<servlet-name>spring</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:config/spring-mvc.xml</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>spring</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
 	
 	<servlet>  
 	  <servlet-name>coreServlet</servlet-name>  
@@ -40,6 +26,7 @@
 	  	<param-name>token</param-name>
 	  	<param-value>tonto</param-value>
 	  </init-param>
+	  <load-on-startup>1</load-on-startup>
 	</servlet>
 	  
 	<!-- url-pattern中配置的/coreServlet用于指定该Servlet的访问路径 -->  
@@ -47,6 +34,23 @@
 	  <servlet-name>coreServlet</servlet-name>  
 	  <url-pattern>/coreServlet</url-pattern>  
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>spring</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:config/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>spring</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	
 	
 	<!-- 调用默认servlet对静态资源处理，默认servlet的name在不同服务器上可能不同 -->
 	<servlet-mapping>
