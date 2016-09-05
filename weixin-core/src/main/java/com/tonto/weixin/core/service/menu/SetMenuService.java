@@ -1,5 +1,6 @@
 package com.tonto.weixin.core.service.menu;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.http.HttpEntity;
@@ -12,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tonto.weixin.core.service.WeChatHttpClient;
 import com.tonto.weixin.core.service.WeChatService;
 import com.tonto.weixin.core.service.WeChatServiceException;
-import com.tonto.weixin.core.service.token.WXAccessTokenService;
+import com.tonto.weixin.core.service.token.WeChatAccessTokenService;
 
 /**
  * 
@@ -50,7 +51,7 @@ public class SetMenuService implements WeChatService {
 	 *	            {
 	 *	               "type":"view",
 	 *	               "name":"主页",
-	 *	               "url":"http://zxwgdft.oicp.net/tonto/main.html"
+	 *	               "url":"http://154713i0y8.iask.in/tonto/wx/test/test"
 	 *	            }]
 	 *	       }]
 	 *	 }
@@ -67,15 +68,16 @@ public class SetMenuService implements WeChatService {
 	 */
 	public void setMenu(InputStream input) {
 		
-		HttpPost post = new HttpPost(url + WXAccessTokenService.getAccessToken());
+		HttpPost post = new HttpPost(url + WeChatAccessTokenService.getAccessToken());
 
 		InputStreamEntity postEntity = new InputStreamEntity(input,
 				ContentType.create("text/plain", "UTF-8"));
 		
 		post.setEntity(postEntity);
-		
-		try (CloseableHttpResponse response = WeChatHttpClient.sendRequest(post);){
-
+		CloseableHttpResponse response = null;
+		try{
+			
+			response = WeChatHttpClient.sendRequest(post);
 			HttpEntity responseEntity = response.getEntity();
 			Result result = new ObjectMapper().readValue(
 					responseEntity.getContent(), Result.class);
@@ -90,6 +92,16 @@ public class SetMenuService implements WeChatService {
 		} catch (Exception e) {
 			throw new WeChatServiceException("设置微信公众号菜单失败！",e);
 		} 
+		finally{
+			
+			try {
+				response.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 	}
 
 	static class Result {

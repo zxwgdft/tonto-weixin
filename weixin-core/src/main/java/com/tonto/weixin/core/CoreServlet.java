@@ -115,7 +115,7 @@ public class CoreServlet extends HttpServlet {
 		String respContent = encoder.encode(responseMessage);
 
 		if (logger.isDebugEnabled())
-			logger.debug("send context:" + respContent);
+			logger.debug("send context:\n" + respContent);
 
 		PrintWriter out = response.getWriter();
 		out.print(respContent);

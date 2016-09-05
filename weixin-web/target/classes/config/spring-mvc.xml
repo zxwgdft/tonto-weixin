@@ -68,7 +68,7 @@
 	<!-- 控制器异常处理 -->
 	<bean id="exceptionHandlerExceptionResolver" class="com.tonto.wx.exception.ExceptionHandler"></bean>
  
-  	<!-- <mvc:interceptors>    
-	    <bean class="com.tonto.hms.ums.interceptor.UserSessionInterceptor"></bean>      
-	</mvc:interceptors> --> 
+  	<mvc:interceptors>    
+	    <bean class="com.tonto.wx.web.interceptors.wechat.JsSdkSignInterceptor"></bean>      
+	</mvc:interceptors>
 </beans>

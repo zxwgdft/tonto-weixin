@@ -17,6 +17,10 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
+	<listener>
+		<listener-class>com.tonto.wx.web.util.WebUtil</listener-class>
+	</listener>
+	
 	<servlet>  
 	  <servlet-name>coreServlet</servlet-name>  
 	  <servlet-class>  

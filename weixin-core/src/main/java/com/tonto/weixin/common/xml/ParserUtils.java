@@ -13,8 +13,6 @@ public class ParserUtils {
 	
 	public static boolean isNumClass(Class<?> clazz)
 	{
-		return clazz.equals(int.class)||clazz.equals(Integer.class)||clazz.equals(double.class)
-				||clazz.equals(Double.class)||clazz.equals(float.class)||clazz.equals(Float.class)
-				||clazz.equals(long.class)||clazz.equals(Long.class);
+		return Number.class.isAssignableFrom(clazz);
 	}
 }
