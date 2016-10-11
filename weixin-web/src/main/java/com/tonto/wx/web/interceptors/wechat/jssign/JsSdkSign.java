@@ -1,9 +1,9 @@
 package com.tonto.wx.web.interceptors.wechat.jssign;
 
-import com.tonto.common.util.RandomUtil;
 import com.tonto.weixin.core.SignUtil;
 import com.tonto.weixin.core.service.WeChatConfig;
 import com.tonto.weixin.core.service.token.WeChatJsTicketService;
+import com.tonto2.common.utils.random.RandomUtil;
 
 /**
  * 

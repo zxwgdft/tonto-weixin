@@ -1,6 +1,7 @@
 package com.tonto.weixin.core.service;
 
-import com.tonto.common.util.PropertyUtil;
+import com.tonto2.common.utils.properties.PropertyUtil;
+
 
 /**
  * 

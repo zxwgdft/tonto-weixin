@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<menu name="主菜单" id="1">	
-	<action name="测试" id="11" class="testAction" input="请输入您的话"></action>
-</menu>

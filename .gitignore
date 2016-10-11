@@ -19,7 +19,7 @@ hs_err_pid*
 .mymetadata
 .project
 pom.properties
-hms-core/target/
-hms-core/target
-hms-web/target/
-hms-web/target
+weixin-core/target/
+weixin-core/target
+weixin-web/target/
+weixin-web/target
